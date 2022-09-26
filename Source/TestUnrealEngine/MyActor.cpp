@@ -25,6 +25,11 @@ AMyActor::AMyActor()
 void AMyActor::BeginPlay()
 {
 	Super::BeginPlay();
+
+	// 시작
+
+	// 카테고리, 로깅 수준, 형식, 인자
+	UE_LOG(LogTemp, Warning, TEXT("BeginPlay %d"), 3);
 	
 }
 
@@ -33,5 +38,9 @@ void AMyActor::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+	//UE_LOG(LogTemp, Error, TEXT("Tick %f"), DeltaTime);
+
+	//Tick은 컴퓨터마다 다르게 호출됨으로 시간을 곱해서 모든 컴퓨터에서 같은 동작을 하도록 설정해준다.
+	AddActorLocalRotation(FRotator(0.F, RotateSpeed * DeltaTime, 0.f));
 }
 
