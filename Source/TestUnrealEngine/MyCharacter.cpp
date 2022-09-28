@@ -55,6 +55,7 @@ void AMyCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompone
 	PlayerInputComponent->BindAxis(TEXT("UpDown"), this, &AMyCharacter::UpDown);
 
 	PlayerInputComponent->BindAxis(TEXT("LeftRight"), this, &AMyCharacter::LeftRight);
+	PlayerInputComponent->BindAxis(TEXT("Yaw"), this, &AMyCharacter::Yaw);
 
 }
 
@@ -76,4 +77,9 @@ void AMyCharacter::LeftRight(float Value)
 	AddMovementInput(GetActorRightVector(), Value);
 
 	//UE_LOG(LogTemp, Warning, TEXT("LeftRight %f"), Value);
+}
+
+void AMyCharacter::Yaw(float Value)
+{
+	AddControllerYawInput(Value);
 }

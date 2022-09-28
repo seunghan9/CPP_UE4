@@ -29,6 +29,7 @@ public:
 private:
 	void UpDown(float Value);
 	void LeftRight(float Value);
+	void Yaw(float Value);
 
 	UPROPERTY(VisibleAnywhere)
 	class USpringArmComponent* SpringArm;
