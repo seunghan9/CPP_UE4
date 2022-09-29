@@ -14,4 +14,5 @@ class TESTUNREALENGINE_API ATestUnrealEngineGameModeBase : public AGameModeBase
 {
 	GENERATED_BODY()
 	
+	
 };
