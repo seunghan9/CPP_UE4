@@ -14,8 +14,12 @@ class TESTUNREALENGINE_API UMyAnimInstance : public UAnimInstance
 {
 	GENERATED_BODY()
 	
+public:
+	UMyAnimInstance();
+
 	virtual void NativeUpdateAnimation(float DeltaSeconds) override;
 	
+	void PlayAttackMontage();
 private:
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = pawn , Meta =(AllowPrivateAccess = true)/*Private 이지만 쓸 수 있다.*/)
@@ -23,4 +27,7 @@ private:
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = pawn, Meta = (AllowPrivateAccess = true))
 	bool bIsFalling;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = pawn, Meta = (AllowPrivateAccess = true))
+	UAnimMontage* AttackMontage;
 };
