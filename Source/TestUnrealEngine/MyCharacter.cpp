@@ -39,8 +39,19 @@ void AMyCharacter::BeginPlay()
 {
 	Super::BeginPlay();
 	
+
+}
+
+void AMyCharacter::PostInitializeComponents()
+{
+	Super::PostInitializeComponents();
+
 	AnimInstace = Cast<UMyAnimInstance>(GetMesh()->GetAnimInstance());
-	AnimInstace->OnMontageEnded.AddDynamic(this, &AMyCharacter::OnAttackMontageEnded);
+	if (AnimInstace)
+	{
+		AnimInstace->OnMontageEnded.AddDynamic(this, &AMyCharacter::OnAttackMontageEnded);
+		AnimInstace->OnAttackHit.AddUObject(this, &AMyCharacter::AttackCheck);
+	}
 }
 
 // Called every frame
@@ -76,6 +87,14 @@ void AMyCharacter::Attack()
 	AttackIndex = (AttackIndex + 1) % 3;
 
 	bIsAttacking = true;
+}
+
+void AMyCharacter::AttackCheck()
+{
+	FHitResult HitResult;
+	FCollisionObjectQueryParams Params(NAME_None, false, this);
+
+	float
 }
 
 void AMyCharacter::UpDown(float Value)
