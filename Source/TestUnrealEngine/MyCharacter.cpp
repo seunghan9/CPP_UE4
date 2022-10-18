@@ -7,7 +7,7 @@
 #include "Components/CapsuleComponent.h"
 #include "MyAnimInstance.h"
 #include "DrawDebugHelpers.h"
-
+#include "MyWeapon.h"
 // Sets default values
 AMyCharacter::AMyCharacter()
 {
@@ -33,7 +33,7 @@ AMyCharacter::AMyCharacter()
 		GetMesh()->SetSkeletalMesh(SM.Object);
 	}
 
-	FName WeaponSocket(TEXT("hand_L_Socket"));
+	/*FName WeaponSocket(TEXT("hand_L_Socket"));
 	if (GetMesh()->DoesSocketExist(WeaponSocket))
 	{
 		Weapon = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("WEAPON"));
@@ -45,7 +45,7 @@ AMyCharacter::AMyCharacter()
 		}
 
 		Weapon->SetupAttachment(GetMesh(), WeaponSocket);
-	}
+	}*/
 }
 
 // Called when the game starts or when spawned
@@ -53,7 +53,13 @@ void AMyCharacter::BeginPlay()
 {
 	Super::BeginPlay();
 	
+	FName WeaponSocket(TEXT("hand_L_Socket"));
+	auto CurrentWeapon = GetWorld()->SpawnActor<AMyWeapon>(FVector::ZeroVector,FRotator::ZeroRotator);
 
+	if (CurrentWeapon)
+	{
+		CurrentWeapon->AttachToComponent(GetMesh(), FAttachmentTransformRules::SnapToTargetNotIncludingScale, WeaponSocket);
+	}
 }
 
 void AMyCharacter::PostInitializeComponents()
